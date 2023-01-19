@@ -1,12 +1,12 @@
 {
-        "parser": "@babel/eslint-parser",
+        "parser": "@typescript-eslint/parser",
         "env": {
                 "es6": true,
                 "browser": true,
                 "node": true
         },
         "rules": {
-
+                "require-jsdoc": "off"
         },
         "extends": ["eslint:recommended", "google"]
 }
