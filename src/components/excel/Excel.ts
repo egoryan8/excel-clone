@@ -1,8 +1,8 @@
 import {Header} from '../header/Header';
-import {$} from '../../core/Dom';
+import {$, Dom} from '../../core/Dom';
 
-interface OptionsI {
-  components: typeof Header[];
+export interface OptionsI {
+  components: (typeof Header)[];
 }
 
 export interface ExcelI {
@@ -11,10 +11,10 @@ export interface ExcelI {
 }
 
 export class Excel {
-  private $el: Element;
+  private $el: Dom;
   private components: typeof Header[];
   constructor({selector, options}: ExcelI) {
-    this.$el = document.querySelector(selector);
+    this.$el = $(selector);
     this.components = options.components || [];
   }
 
@@ -22,9 +22,9 @@ export class Excel {
     const $root = $.create('div', 'excel');
     this.components.forEach((Component) => {
       const $el = $.create('div', Component.className);
+      // @ts-ignore
       const component = new Component($el);
-
-      $el.insertAdjacentHTML('afterbegin', component.toHTML());
+      $el.html(component.toHTML());
       $root.append($el);
     });
     return $root;
