@@ -1,6 +1,5 @@
 import {Header} from '../header/Header';
 import {$, Dom} from '../../core/Dom';
-
 export interface OptionsI {
   components: (typeof Header)[];
 }
