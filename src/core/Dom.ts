@@ -14,6 +14,10 @@ export class Dom {
     return this.$el.outerHTML.trim();
   }
 
+  on(event: string, callback: any) {
+    this.$el.addEventListener(event, callback);
+  }
+
   clear() {
     this.html('');
     return this;
