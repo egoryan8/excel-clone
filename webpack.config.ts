@@ -17,6 +17,10 @@ module.exports = {
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+      '@core': path.resolve(__dirname, 'src/core'),
+    },
   },
   devtool: isDev ? 'source-map' : false,
   devServer: {
