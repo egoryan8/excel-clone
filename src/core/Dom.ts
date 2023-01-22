@@ -18,6 +18,10 @@ export class Dom {
     this.$el.addEventListener(event, callback);
   }
 
+  off(event: string, callback: any) {
+    this.$el.removeEventListener(event, callback);
+  }
+
   clear() {
     this.html('');
     return this;

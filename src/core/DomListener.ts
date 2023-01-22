@@ -14,7 +14,7 @@ export class DomListener {
 
   initDomListeners() {
     this.listeners.forEach((listener) => {
-      const method: any = getMethodName(listener);
+      const method = getMethodName(listener);
       // @ts-ignore
       if (!this[method]) {
         throw new Error(`method ${method} is not defined in Component`);
@@ -29,7 +29,13 @@ export class DomListener {
   }
 
   removeDomListeners() {
-
+    this.listeners.forEach((listener) => {
+      const method = getMethodName(listener);
+      if (this.$root instanceof Dom) {
+        // @ts-ignore
+        this.$root.off(listener, this[method]);
+      }
+    });
   }
 }
 

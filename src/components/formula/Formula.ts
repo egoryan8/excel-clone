@@ -20,4 +20,8 @@ export class Formula extends ExcelComponent {
     console.log(this.$root);
     console.log('Formula: onInput', e.target.textContent);
   }
+
+  onClick() {
+    console.log('click');
+  }
 }
