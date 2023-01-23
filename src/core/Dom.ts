@@ -38,6 +38,10 @@ export class Dom {
     }
   }
 
+  get data() {
+    return this.$el.dataset;
+  }
+
   closest(selector: string) {
     // @ts-ignore
     return $(this.$el.closest(selector));
