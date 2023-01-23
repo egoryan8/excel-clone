@@ -1,5 +1,5 @@
 export class Dom {
-  private $el: Element;
+  $el: HTMLElement;
   constructor(selector: string | HTMLElement) {
     this.$el = typeof selector === 'string'
       ? document.querySelector(selector)
@@ -36,6 +36,15 @@ export class Dom {
     } else {
       this.$el.appendChild(node);
     }
+  }
+
+  closest(selector: string) {
+    // @ts-ignore
+    return $(this.$el.closest(selector));
+  }
+
+  getCoords() {
+    return this.$el.getBoundingClientRect();
   }
 }
 

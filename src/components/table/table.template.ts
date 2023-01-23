@@ -11,7 +11,7 @@ function toCell() {
 
 function toColumn(col: string) {
   return `
-    <div class="column">
+    <div class="column" data-type="resizable">
       ${col}
       <div class="col-resize" data-resize="col"></div>
     </div>
@@ -21,7 +21,7 @@ function toColumn(col: string) {
 function createRow(index: number | null, content: string) {
   return `
     <div class="row">
-      <div class="row-info">
+      <div class="row-info" data-type="resizable">
         ${index ? index : ''}
         ${index ? '<div class="row-resize" data-resize="row"></div>' : ''}
       </div>
