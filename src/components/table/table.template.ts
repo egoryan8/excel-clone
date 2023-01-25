@@ -20,8 +20,8 @@ function toColumn(col: string, index: number) {
 
 function createRow(index: number | null, content: string) {
   return `
-    <div class="row">
-      <div class="row-info" data-type="resizable">
+    <div class="row" data-type="resizable">
+      <div class="row-info">
         ${index ? index : ''}
         ${index ? '<div class="row-resize" data-resize="row"></div>' : ''}
       </div>
