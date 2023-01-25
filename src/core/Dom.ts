@@ -54,6 +54,11 @@ export class Dom {
   findAll(selector: string) {
     return this.$el.querySelectorAll(selector);
   }
+
+  css(style = {}) {
+    // @ts-ignore
+    Object.keys(style).forEach((key) => this.$el.style[key] = style[key]);
+  }
 }
 
 export function $(selector: string | HTMLElement) {
