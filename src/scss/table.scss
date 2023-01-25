@@ -73,14 +73,15 @@
     opacity: 0;
     background-color: $blue;
     transition: opacity 0.2s linear;
+    z-index: 1000;
 
     &:hover {
-      opacity: 1;
+      opacity: 1!important;
     }
   }
   
   .col-resize {
-    width: 3px;
+    width: 4px;
     top: 0;
 
     &:hover {
