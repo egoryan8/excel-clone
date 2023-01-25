@@ -50,6 +50,10 @@ export class Dom {
   getCoords() {
     return this.$el.getBoundingClientRect();
   }
+
+  findAll(selector: string) {
+    return this.$el.querySelectorAll(selector);
+  }
 }
 
 export function $(selector: string | HTMLElement) {

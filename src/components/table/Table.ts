@@ -1,6 +1,6 @@
 import {ExcelComponent} from '../../core/ExcelComponent';
 import {createTable} from './table.template';
-import {$} from '../../core/Dom';
+import {$, Dom} from '../../core/Dom';
 
 export class Table extends ExcelComponent {
   static className = 'excel__table';
@@ -15,16 +15,15 @@ export class Table extends ExcelComponent {
       const $resizer = $(event.target);
       const $parent = $resizer.closest('[data-type="resizable"]');
       const coords = $parent.getCoords();
-      console.log($parent.data.col);
+      const cells = this.$root instanceof Dom ? this.$root.findAll(`[data-col="${$parent.data.col}"]`) : '';
 
       document.onmousemove = (event) => {
         console.log('onmousemove');
         const delta = Math.floor(event.pageX - coords.right);
         const value = coords.width + delta;
         $parent.$el.style.width = value + 'px';
-        document.querySelectorAll(`[data-col="${$parent.data.col}"]`)
         // @ts-ignore
-            .forEach((el) => el.style.width = value + 'px');
+        cells.forEach((el) => el.style.width = value + 'px');
       };
 
       document.onmouseup = (event) => {
