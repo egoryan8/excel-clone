@@ -1,8 +1,9 @@
 import {ExcelComponent} from '../../core/ExcelComponent';
 import {createTable} from './table.template';
-import {Dom} from '../../core/Dom';
+import {$, Dom} from '../../core/Dom';
 import {resizeHandler} from './table.resize';
 import {TableSelection} from './TableSelection';
+import {isCell} from './table.functions';
 
 export class Table extends ExcelComponent {
   static className = 'excel__table';
@@ -28,6 +29,9 @@ export class Table extends ExcelComponent {
   onMousedown(event: {target: HTMLElement}) {
     if (event.target.dataset.resize && this.$root instanceof Dom) {
       resizeHandler(this.$root, event);
+    } else if (isCell(event)) {
+      const $target = $(event.target);
+      this.selection.select($target);
     }
   }
   toHTML(): string {
