@@ -22,6 +22,10 @@ export class Dom {
     this.$el.removeEventListener(event, callback);
   }
 
+  find(selector: string) {
+    return $(this.$el.querySelector(selector) as HTMLElement);
+  }
+
   clear() {
     this.html('');
     return this;
@@ -58,6 +62,14 @@ export class Dom {
   css(style = {}) {
     // @ts-ignore
     Object.keys(style).forEach((key) => this.$el.style[key] = style[key]);
+  }
+
+  addClass(className: string) {
+    this.$el.classList.add(className);
+  }
+
+  removeClass(className: string) {
+    this.$el.classList.remove(className);
   }
 }
 

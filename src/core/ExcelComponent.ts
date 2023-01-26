@@ -6,8 +6,15 @@ export interface OptionsI {
 }
 export class ExcelComponent extends DomListener {
   // eslint-disable-next-line max-len
+  private name: string;
   constructor($root: HTMLElement, options: OptionsI | Record<string, any> = {}) {
     super($root, options.listeners);
+    this.name = options.name || '';
+    this.prepare();
+  }
+
+  prepare() {
+
   }
 
   // Возвращает шаблон компонента
