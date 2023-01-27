@@ -64,6 +64,17 @@ export class Dom {
     Object.keys(style).forEach((key) => this.$el.style[key] = style[key]);
   }
 
+  id(parse?: any): any {
+    if (parse) {
+      const parsed = this.id().split(':');
+      return {
+        row: +parsed[0],
+        col: +parsed[1],
+      };
+    }
+    return this.data.id;
+  }
+
   addClass(className: string) {
     this.$el.classList.add(className);
   }

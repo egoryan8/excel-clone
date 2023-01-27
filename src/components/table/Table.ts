@@ -3,7 +3,7 @@ import {createTable} from './table.template';
 import {$, Dom} from '../../core/Dom';
 import {resizeHandler} from './table.resize';
 import {TableSelection} from './TableSelection';
-import {isCell} from './table.functions';
+import {isCell, matrix} from './table.functions';
 
 export class Table extends ExcelComponent {
   static className = 'excel__table';
@@ -26,12 +26,18 @@ export class Table extends ExcelComponent {
     }
   }
 
-  onMousedown(event: {target: HTMLElement}) {
+  onMousedown(event: {target: HTMLElement, shiftKey: boolean}) {
     if (event.target.dataset.resize && this.$root instanceof Dom) {
       resizeHandler(this.$root, event);
     } else if (isCell(event)) {
       const $target = $(event.target);
-      this.selection.select($target);
+      if (event.shiftKey) {
+        // @ts-ignore
+        const $cells = matrix($target, this.selection.current).map((id) => this.$root.find(`[data-id="${id}"]`));
+        this.selection.selectGroup($cells);
+      } else {
+        this.selection.select($target);
+      }
     }
   }
   toHTML(): string {
