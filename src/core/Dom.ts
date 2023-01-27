@@ -75,6 +75,11 @@ export class Dom {
     return this.data.id;
   }
 
+  focus() {
+    this.$el.focus();
+    return this;
+  }
+
   addClass(className: string) {
     this.$el.classList.add(className);
   }

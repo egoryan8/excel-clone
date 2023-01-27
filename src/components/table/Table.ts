@@ -3,14 +3,14 @@ import {createTable} from './table.template';
 import {$, Dom} from '../../core/Dom';
 import {resizeHandler} from './table.resize';
 import {TableSelection} from './TableSelection';
-import {isCell, matrix} from './table.functions';
+import {isCell, matrix, nextSelector} from './table.functions';
 
 export class Table extends ExcelComponent {
   static className = 'excel__table';
   private selection: TableSelection;
   constructor($root: HTMLElement) {
     super($root, {
-      listeners: ['mousedown'],
+      listeners: ['mousedown', 'keydown'],
     });
   }
 
@@ -24,6 +24,10 @@ export class Table extends ExcelComponent {
       const $cell = this.$root.find('[data-id="0:0"]');
       this.selection.select($cell);
     }
+  }
+
+  toHTML(): string {
+    return createTable();
   }
 
   onMousedown(event: {target: HTMLElement, shiftKey: boolean}) {
@@ -40,7 +44,18 @@ export class Table extends ExcelComponent {
       }
     }
   }
-  toHTML(): string {
-    return createTable();
+
+  onKeydown(event: KeyboardEvent) {
+    this.$root = this.$root as Dom;
+    const codes = ['Tab', 'Enter', 'ArrowUp', 'ArrowLeft', 'ArrowRight', 'ArrowDown'];
+    const {key} = event;
+    if (codes.includes(key) && !event.shiftKey) {
+      event.preventDefault();
+      const id = this.selection.current.id(true);
+      const $next = this.$root.find(nextSelector(key, id));
+      this.selection.select($next);
+    }
   }
 }
+
+
